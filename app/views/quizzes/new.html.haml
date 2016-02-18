@@ -1,3 +1,5 @@
-%h1 Hello World!
-=simple_form_for :quiz do |form|
+%h1 New Quiz 
+=simple_form_for @quiz do |form|
   =form.input :title
+  =form.input :url
+  =form.submit "Create Quiz"
