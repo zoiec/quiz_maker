@@ -18,10 +18,14 @@ class QuizzesController < ApplicationController
     @quizzes = Quiz.all
   end
 
+  def show
+    @quiz = Quiz.find(params[:id])
+  end
+
   private
 
   def quiz_params
-    params.require(:quiz).permit(:url, :title)
+    params.require(:quiz).permit(:url, :title, :intro_content)
   end
 
 end
