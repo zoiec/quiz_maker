@@ -6,9 +6,10 @@ class OutcomesController < ApplicationController
   end
 
   def create
+    @quiz = Quiz.find(params[:quiz_id])
     @outcome = Outcome.create(outcome_params)
     if(@outcome.save)
-      redirect_to @outcome.quiz
+      redirect_to edit_quiz_path(@outcome.quiz)
     else
       render :new
     end
@@ -17,7 +18,7 @@ class OutcomesController < ApplicationController
   private
 
   def outcome_params
-    params.require(:outcome).permit(:body).merge(quiz_id: params[:quiz_id])
+    params.require(:outcome).permit(:body, :name).merge(quiz: @quiz) 
   end
 
 end

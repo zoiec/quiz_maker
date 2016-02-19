@@ -8,9 +8,9 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.create(quiz_params)
     if @quiz.save
       flash[:notice] = "Quiz created"
-      redirect_to quizzes_path
+      render :edit, status: 201
     else
-      render :new
+      render :new, status: 422
     end
   end
 
@@ -22,6 +22,9 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.find(params[:id])
   end
 
+  def edit
+    @quiz = Quiz.find(params[:id])
+  end
   private
 
   def quiz_params
