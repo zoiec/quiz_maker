@@ -11,10 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160219231121) do
+ActiveRecord::Schema.define(version: 20160223223722) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answers", force: :cascade do |t|
+    t.string   "body"
+    t.integer  "question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "outcomes", force: :cascade do |t|
     t.string   "body"
@@ -37,6 +44,14 @@ ActiveRecord::Schema.define(version: 20160219231121) do
     t.datetime "updated_at"
     t.string   "url"
     t.text     "intro_content"
+  end
+
+  create_table "weights", force: :cascade do |t|
+    t.integer  "outcome_id"
+    t.integer  "answer_id"
+    t.integer  "strength"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

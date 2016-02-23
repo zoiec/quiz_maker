@@ -6,9 +6,21 @@ RSpec.describe Question, type: :model do
     expect { FactoryGirl.create(:question) } .not_to raise_error
   end
 
-  it 'is invalid without a body'
+  it 'is invalid without a body' do
 
-  it 'is invalid without a quiz'
+    question = FactoryGirl.build(:question, body: '')
+
+    expect(question.save).to eq(false)
+
+  end
+
+  it 'is invalid without a quiz' do
+
+    question = FactoryGirl.build(:question, quiz: nil)
+
+    expect(question.save).to eq(false)
+
+  end
 
 
 end
