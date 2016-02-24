@@ -13,4 +13,5 @@
   -@quiz.questions.each do |question|
     %tr
       %td= question.body
+      %td= link_to "Edit Question", edit_question_path(question.id), class: 'small button no-margin'
 =link_to "Add Question", new_quiz_question_path(@quiz.id), class: 'button'
