@@ -1,4 +1,7 @@
 %h1 Quizzes
 
-- @quizzes.each do |quiz|
-  = quiz.title
+%table
+  - @quizzes.each do |quiz|
+    %tr
+      %td= quiz.title
+      %td= link_to "Edit Quiz", edit_quiz_path(quiz), class: 'button small no-margin'

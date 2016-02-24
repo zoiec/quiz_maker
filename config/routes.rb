@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   resources :answers, only: [:edit] do
     resources :weights, only: [:new, :create]
   end
-  
+  resources :outcomes, only: [:edit]  
 
 end

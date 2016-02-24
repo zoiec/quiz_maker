@@ -22,4 +22,12 @@ RSpec.describe OutcomesController do
     expect(quiz.outcomes).not_to be_empty
   end
 
+  it 'renders the edit screen when the edit action is called' do
+    outcome = FactoryGirl.create(:outcome)
+
+    get :edit, id: outcome.id
+
+    expect(assigns(:outcome)).to eq(outcome)
+    expect(response).to render_template(:edit)
+  end
 end

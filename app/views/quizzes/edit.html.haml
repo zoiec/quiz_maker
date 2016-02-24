@@ -5,6 +5,7 @@
   -@quiz.outcomes.each do |outcome|
     %tr
       %td= outcome.name
+      %td= link_to "Edit Outcome", edit_outcome_path(outcome), class: "small button no-margin"
 =link_to "Add Outcome", new_quiz_outcome_path(@quiz.id), class: 'button'
       
 %h2 Questions

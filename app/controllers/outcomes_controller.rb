@@ -15,6 +15,10 @@ class OutcomesController < ApplicationController
     end
   end
 
+  def edit
+    @outcome = Outcome.find(params[:id])
+  end
+
   private
 
   def outcome_params
