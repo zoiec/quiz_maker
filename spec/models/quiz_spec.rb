@@ -18,6 +18,16 @@ RSpec.describe Quiz, type: :model do
     expect(quiz.save).to be(false)
   end
 
+  it 'can be published or not' do
+    unpublished_quiz = FactoryGirl.create(:quiz)
+    published_quiz = FactoryGirl.create(:quiz)
+
+    published_quiz.publish!
+
+    expect(Quiz.published).to include(published_quiz)
+    expect(Quiz.published).not_to include(unpublished_quiz)
+  end
+
   it 'fails to validate if slug contains spaces'
 
   it 'fails to validate if slug is not unique'

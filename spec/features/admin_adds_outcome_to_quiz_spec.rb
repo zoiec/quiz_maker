@@ -2,6 +2,11 @@ require 'rails_helper'
 
 RSpec.feature 'Admin user adds outcomes to a quiz' do
 
+  before(:each) do
+    user = FactoryGirl.create(:user, admin: true)
+    login_as(user, scope: :user)
+  end
+
   let(:quiz) { FactoryGirl.create(:quiz) }
 
   scenario 'successfully with valid information' do

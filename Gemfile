@@ -13,6 +13,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'haml-rails'
 gem 'simple_form'
 gem 'foundation-rails'
+gem 'devise'
+gem 'pundit'
 
 group :development, :test do
   gem 'byebug'

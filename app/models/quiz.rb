@@ -4,6 +4,10 @@ class Quiz < ActiveRecord::Base
   validates :title, presence: true
   validates :url, presence: true
 
+  scope :published, -> { where(published: true) }
 
+  def publish!
+    self.update_attributes(published: true, published_at: Time.now)
+  end
 
 end

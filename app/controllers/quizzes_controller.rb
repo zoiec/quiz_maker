@@ -1,4 +1,5 @@
 class QuizzesController < ApplicationController
+  before_action :require_login, except: [:show]
 
   def new
     @quiz = Quiz.new
@@ -24,6 +25,7 @@ class QuizzesController < ApplicationController
 
   def edit
     @quiz = Quiz.find(params[:id])
+    authorize @quiz
   end
   private
 

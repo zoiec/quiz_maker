@@ -3,11 +3,22 @@
   %head 
     %meta{:charset => "utf-8"}
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-    %title= content_for?(:title) ? yield(:title) : "Untitled"
+    %title= content_for?(:title) ? yield(:title) : "Quiz Maker"
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application", 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
     .container
+      .top-bar
+        .top-bar-left
+          =link_to "Quiz Maker", root_path
+        .top-bar-right
+          =log_in_button
+
+    .container
       .columns.small-10.small-push-1
+        -if notice.present?
+          %p.callout.success= notice
+        -if alert.present?
+          %p.callout.alert= alert
         = yield

@@ -2,6 +2,11 @@ require "rails_helper"
 
 RSpec.feature "Admin creates quiz" do
 
+  before(:each) do
+    user = FactoryGirl.create(:user)
+    login_as(user, scope: :user)
+  end
+
   let(:title) { Faker::Lorem.sentence(3) }
 
   scenario "succesfully with valid information" do
