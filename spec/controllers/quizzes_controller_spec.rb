@@ -2,36 +2,86 @@ require 'rails_helper'
 
 RSpec.describe QuizzesController, type: :controller do
 
-  it 'renders the new page after the new action is called' do
-    get :new
+  before(:each) do
+    login_as_admin
+  end
+  
+  context "#new" do
+    it 'renders the new page after the new action is called' do
+      get :new
 
-    expect(response).to render_template(:new)
-    expect(assigns(:quiz)).to be_a_new(Quiz)
+      expect(response).to render_template(:new)
+    end
+
+    it 'assigns a new quiz' do
+      get :new
+
+      expect(assigns(:quiz)).to be_a_new(Quiz)
+    end
   end
 
-  it 'creates a new Quiz when the create action is called with valid data' do
-    quiz_attrs = FactoryGirl.attributes_for(:quiz)
-    post :create, quiz: quiz_attrs
+  context '#create' do
+    it 'renders the edit template of the newly created quiz' do
+      quiz_attrs = FactoryGirl.attributes_for(:quiz)
+      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      post :create, quiz: quiz_attrs
 
-    expect(response).to render_template(:edit)
-    expect(response).to have_http_status(201)
-    expect(Quiz.all).not_to be_empty
+      expect(response).to render_template(:edit)
+    end
+
+    it 'returns a 201' do
+      quiz_attrs = FactoryGirl.attributes_for(:quiz)
+      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      post :create, quiz: quiz_attrs
+
+      expect(response).to have_http_status(201)
+    end
+
+    it 'creates a quiz' do
+      quiz_attrs = FactoryGirl.attributes_for(:quiz)
+
+      post :create, quiz: quiz_attrs
+
+      expect(Quiz.count).to eq(1)
+    end
+
+    it 'renders the new page when create is called with invalid data' do
+      post :create, quiz: {title: ''}
+
+      expect(response).to render_template(:new)
+    end
+
+    it 'returns a 422 when create is called with invalid data' do
+      post :create, quiz: {title: ''}
+
+      expect(response).to have_http_status(422)
+    end
+
+    it 'does not create a quiz when create is called with invalid data' do
+      post :create, quiz: {title: ''}
+
+      expect(Quiz.all).to be_empty
+    end
   end
 
-  it 'renders the new page when create is called with invalid data' do
-    post :create, quiz: {title: ''}
+  context '#index' do
+    it 'renders index when index is called' do
+      get :index
 
-    expect(response).to render_template(:new)
-    expect(response).to have_http_status(422)
-    expect(Quiz.all).to be_empty
-  end
+      expect(response).to render_template(:index)
+    end
 
-  it 'renders index with a list of quizzes when index is called' do
-    get :index
+    it 'returns a 200 status when index is called' do
+      get :index
 
-    expect(response).to render_template(:index)
-    expect(response).to have_http_status(200)
-    expect(assigns(:quizzes)).to eq(Quiz.all)
+      expect(response).to have_http_status(200)
+    end
+
+    it 'returns a list of all quizzes when index is called' do
+      get :index
+
+      expect(assigns(:quizzes)).to eq(Quiz.all)
+    end
   end
 
   it 'renders the show action with the correct quiz when show is called' do

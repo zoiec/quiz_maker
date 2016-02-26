@@ -9,6 +9,10 @@ require 'rspec/rails'
 
 require_relative 'support/factory_girl'
 require_relative 'support/login'
+RSpec.configure do |config|
+    config.include Devise::TestHelpers, type: :controller
+      config.include Devise::TestHelpers, type: :view
+end
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
 # in _spec.rb will both be required and run as specs, causing the specs to be

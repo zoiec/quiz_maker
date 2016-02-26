@@ -6,7 +6,7 @@ class QuizzesController < ApplicationController
   end
 
   def create
-    @quiz = Quiz.create(quiz_params)
+    @quiz = Quiz.new(quiz_params)
     if @quiz.save
       flash[:notice] = "Quiz created"
       render :edit, status: 201
@@ -25,7 +25,6 @@ class QuizzesController < ApplicationController
 
   def edit
     @quiz = Quiz.find(params[:id])
-    authorize @quiz
   end
   private
 
