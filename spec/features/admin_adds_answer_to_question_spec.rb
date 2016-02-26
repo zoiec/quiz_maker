@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'Admin adds an answer to a question' do
   before(:each) do
-    login_as_admin
+    warden_login_as_admin
   end
 
   let(:question) { FactoryGirl.create(:question, :with_quiz) }

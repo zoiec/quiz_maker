@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature 'Admin edits a quiz from the home page' do
 
   before(:each) do
-    login_as_admin
+    warden_login_as_admin
   end
 
   let!(:quiz) { FactoryGirl.create(:quiz) }

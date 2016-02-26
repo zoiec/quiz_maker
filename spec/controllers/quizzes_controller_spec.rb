@@ -1,22 +1,23 @@
 require 'rails_helper'
 
-RSpec.describe QuizzesController, type: :controller do
+RSpec.describe QuizzesController, type: :controller, focus: false do
 
   before(:each) do
-    login_as_admin
+    devise_login_as_admin
   end
   
   context "#new" do
-    it 'renders the new page after the new action is called' do
-      get :new
-
-      expect(response).to render_template(:new)
-    end
 
     it 'assigns a new quiz' do
       get :new
 
       expect(assigns(:quiz)).to be_a_new(Quiz)
+    end
+
+    it 'renders the new page after the new action is called' do
+      get :new
+
+      expect(response).to render_template(:new)
     end
   end
 
@@ -84,14 +85,30 @@ RSpec.describe QuizzesController, type: :controller do
     end
   end
 
-  it 'renders the show action with the correct quiz when show is called' do
-    quiz = FactoryGirl.create(:quiz)
+  context '#show' do
+    it 'renders the show action when show is called' do
+      quiz = FactoryGirl.create(:quiz)
 
-    get :show, id: quiz.id
+      get :show, id: quiz.id
 
-    expect(response).to render_template(:show)
-    expect(response).to have_http_status(200)
-    expect(assigns(:quiz)).to eq(quiz)
+      expect(response).to render_template(:show)
+    end
+    
+    it 'returns a 200 status when show is called' do
+      quiz = FactoryGirl.create(:quiz)
+
+      get :show, id: quiz.id
+
+      expect(response).to have_http_status(200)
+    end
+    
+    it 'returns the correct quiz when show is called' do
+      quiz = FactoryGirl.create(:quiz)
+
+      get :show, id: quiz.id
+
+      expect(assigns(:quiz)).to eq(quiz)
+    end
   end
 
 end
