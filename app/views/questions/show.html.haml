@@ -1,1 +1,5 @@
 %h1= @question.body
+= simple_form_for @question do |form|
+  = form.collection_radio_buttons :answer_id, @question.choices, :id, :body
+- @question.choices.each do |choice|
+  = choice.body
