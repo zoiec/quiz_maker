@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.feature 'Admin adds a weight to an answer' do
+RSpec.feature 'Admin adds a weight to an choice' do
 
-  let(:answer) { FactoryGirl.create(:answer) }
+  let(:choice) { FactoryGirl.create(:choice) }
 
   scenario 'successfully with valid data' do
 
-    visit(edit_answer_path answer)
+    visit(edit_choice_path choice)
     click_on "Add Weight"
 
   end

@@ -1,6 +1,6 @@
 FactoryGirl.define do
 
-  factory :answer do
+  factory :choice do
     body Faker::Lorem.sentence
     association :question
   end

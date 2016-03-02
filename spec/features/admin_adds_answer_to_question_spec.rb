@@ -10,11 +10,11 @@ RSpec.feature 'Admin adds an answer to a question' do
   scenario 'successfully with valid data' do
     visit edit_question_path(question.id)
 
-    click_on "Add Answer"
+    click_on "Add Choice"
     fill_in 'Body', with: Faker::Lorem.sentence
-    click_on "Create Answer"
+    click_on "Create Choice"
 
-    expect(question.answers.count).to eq(1)
+    expect(question.choices.count).to eq(1)
 
   end
 

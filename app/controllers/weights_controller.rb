@@ -1,15 +1,15 @@
 class WeightsController < ApplicationController
 
   def new
-    @answer = Answer.find(params[:answer_id])
+    @choice = Choice.find(params[:choice_id])
     @weight = Weight.new
   end
 
   def create
-    @answer = Answer.find(params[:answer_id])
+    @choice = Choice.find(params[:choice_id])
     @weight = Weight.new(weight_params)
     if @weight.save
-      redirect_to edit_answer_path @answer
+      redirect_to edit_choice_path @choice
     else
       render :new
     end
@@ -18,7 +18,7 @@ class WeightsController < ApplicationController
   private
 
   def weight_params
-    params.require(:weight).permit(:strength, :outcome_id).merge(answer: @answer)
+    params.require(:weight).permit(:strength, :outcome_id).merge(choice: @choice)
   end
 
 end

@@ -1,4 +1,4 @@
-class Answer < ActiveRecord::Base
+class Choice< ActiveRecord::Base
   belongs_to :question
   validates :question, presence: true
   validates :body, presence: true
