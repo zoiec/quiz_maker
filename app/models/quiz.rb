@@ -10,4 +10,8 @@ class Quiz < ActiveRecord::Base
     self.update_attributes(published: true, published_at: Time.now)
   end
 
+  def first_question
+    questions.first
+  end
+
 end

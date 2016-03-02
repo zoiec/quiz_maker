@@ -20,7 +20,7 @@ class QuizzesController < ApplicationController
   end
 
   def show
-    @quiz_facade = QuizFacade.new(Quiz.find(params[:id]))
+    @quiz = Quiz.find(params[:id])
   end
 
   def edit

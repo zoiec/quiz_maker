@@ -107,7 +107,7 @@ RSpec.describe QuizzesController, type: :controller, focus: false do
 
       get :show, id: quiz.id
 
-      expect(assigns(:quiz_facade).id).to eq(quiz.id)
+      expect(assigns(:quiz)).to eq(quiz)
     end
   end
 
