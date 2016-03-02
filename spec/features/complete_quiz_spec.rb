@@ -14,7 +14,7 @@ feature "Complete a quiz" do
   scenario "finish the rest of the quiz" do
     quiz = setup_quiz
 
-    visit question_path(quiz.first_question)
+    visit new_question_answer_path(quiz.first_question)
     answer_question quiz.first_question
   end
 
@@ -34,7 +34,7 @@ feature "Complete a quiz" do
   end
 
   def answer_question question
-    click_on(random_choice(question))
+    choose(random_choice(question))
   end
 
   def random_choice(question)

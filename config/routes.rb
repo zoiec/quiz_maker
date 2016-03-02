@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
   resources :questions, only: [:edit, :show] do
     resources :choices, only: [:new, :create]
+    resources :answers, only: [:new, :create]
   end
   resources :choices, only: [:edit] do
     resources :weights, only: [:new, :create]
