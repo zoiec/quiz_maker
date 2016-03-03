@@ -14,18 +14,25 @@ feature "Complete a quiz" do
   scenario "finish the rest of the quiz" do
     quiz = setup_quiz
     user = create_user
+    visit quiz_path(quiz)
+    begin_quiz
+
     until(quiz.completed? user)
-      current_question = quiz.next_question user
-      visit new_question_answer_path(current_question)
-      answer_question(current_question)
+      answer_question
     end
+
+    expect(current_path).to eq(quiz_result_path(quiz))
     expect(Result.includes(:outcome).includes(:quiz).where("quizzes.id = ? AND user_id = ?", quiz.id, user.id).references(:quizzes)).not_to be_empty
   end
 
 
   def setup_quiz
-    quiz = FactoryGirl.create(:quiz)
-    quiz.questions << create_question(5)
+    quiz = FactoryGirl.create(:quiz, 
+                              intro_content: "Santa will find out!",
+                              title: "Naughty or Nice?",
+                              url: "naughty-or-nice")
+    quiz.questions << create_question(quiz)
+    #map_outcomes
     quiz
   end
 
@@ -35,21 +42,33 @@ feature "Complete a quiz" do
     user
   end
 
-  def create_question num_choices
-    question = FactoryGirl.create(:question)
-    num_choices.times do
-      question.choices << FactoryGirl.create(:choice, body: Faker::Lorem.sentence)
+  def create_question quiz
+    FactoryGirl.create(:question, question_attrs).tap do |question|
+      nice = FactoryGirl.create(:choice, body: "Nice")
+      nice_weight = FactoryGirl.create(:weight, 
+                                       choice: nice, 
+                                       strength: 1, 
+                                       outcome: FactoryGirl.create(:outcome, 
+                                                                   name: "Nice",
+                                                                   quiz: quiz))
+      naughty = FactoryGirl.create(:choice, body: "Naughty")
+      naughty_weight = FactoryGirl.create(:weight, 
+                                          choice: naughty, 
+                                          strength: 1,
+                                          outcome: FactoryGirl.create(:outcome,
+                                                                     name: "Naughty",
+                                                                     quiz: quiz))
+      question.choices = [naughty, nice]
     end
-    question
+  end
+  
+  def question_attrs
+    { body: "Have you been naughty or nice this year?" }
   end
 
-  def answer_question question
-    choose(random_choice(question))
-  end
-
-  def random_choice(question)
-    random_index = Random.rand(question.choices.size)
-    question.choices[random_index].body
+  def answer_question 
+    choose("Nice")
+    click_on("Next")
   end
 
   def begin_quiz

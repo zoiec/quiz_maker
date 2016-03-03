@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :quizzes, only: [:new, :create, :index, :edit, :show] do
     resources :outcomes, only: [:new, :create]
+    resource :result, only: [:show]
     resources :questions, only: [:new, :create]
   end
   resources :questions, only: [:edit, :show] do

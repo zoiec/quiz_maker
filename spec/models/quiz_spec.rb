@@ -28,6 +28,14 @@ RSpec.describe Quiz, type: :model do
     expect(Quiz.published).not_to include(unpublished_quiz)
   end
 
+  it 'is incomplete for a new user' do
+    quiz = FactoryGirl.create(:quiz)
+    quiz.questions << FactoryGirl.create(:question)
+    user = FactoryGirl.create(:user)
+
+    expect(quiz.completed? user).to eq(false)
+  end
+
   it 'fails to validate if slug contains spaces'
 
   it 'fails to validate if slug is not unique'

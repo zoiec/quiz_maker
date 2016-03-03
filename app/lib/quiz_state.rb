@@ -5,16 +5,14 @@ class QuizState
 
   def initialize
     @questions = []
-    @outcomes = []
-    @weights = []
   end
 
   def compute_outcome
     outcome_scores = {}
-    @outcomes.each do |outcome|
-      outcome_scores[outcome] = 0
-    end
     @questions.each do |question|
+      unless(outcome_scores.has_key? question.answer.outcome)
+        outcome_scores[question.answer.outcome] = 0
+      end
       outcome_scores[question.answer.outcome] += question.answer.factor
     end
     outcome_scores.sort_by { |key, value| value } .first[0]

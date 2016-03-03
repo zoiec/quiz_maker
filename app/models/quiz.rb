@@ -11,6 +11,22 @@ class Quiz < ActiveRecord::Base
     self.update_attributes(published: true, published_at: Time.now)
   end
 
+  def compute_result user
+    outcome_totals = {}
+    answers = Answer.where(user: user, choice: choices).includes(:choice)
+    answers.each do |answer|
+      answer.weights.each do |weight|
+        if(outcome_totals.has_key? weight.outcome_id)
+          outcome_totals[weight.outcome_id] += weight.strength
+        else
+          outcome_totals[weight.outcome_id] = weight.strength
+        end
+      end
+    end
+    outcome_id = outcome_totals.sort { |key, value| value }.first[0]
+    Result.create(user: user, outcome_id: outcome_id)
+  end
+
   def first_question
     questions.first
   end
@@ -20,7 +36,7 @@ class Quiz < ActiveRecord::Base
   end
 
   def questions_left?(user)
-    unanswered_questions(user).empty?
+    unanswered_questions(user).count > 0
   end
 
   def answered_questions(user)

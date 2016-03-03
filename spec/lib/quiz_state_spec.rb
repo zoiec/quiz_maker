@@ -11,7 +11,7 @@ describe QuizState do
     quiz.add_question question
 
     while(quiz.questions_left?)
-      answer(quiz.next_question)
+      answer(quiz.next_question, "Yes")
     end
 
     expect(quiz).to be_completed
@@ -28,8 +28,9 @@ describe QuizState do
     quiz.add_question question
   end
 
-  def answer question
-    question.select_choice(0)
+  def answer question, answer
+    choice = question.choices.find_index { |choice| choice.body == answer }
+    question.select_choice(choice)
   end
 
   def choose_random choices
