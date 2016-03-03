@@ -1,9 +1,23 @@
 require_relative "question_state"
+require "byebug"
 
 class QuizState
 
   def initialize
     @questions = []
+    @outcomes = []
+    @weights = []
+  end
+
+  def compute_outcome
+    outcome_scores = {}
+    @outcomes.each do |outcome|
+      outcome_scores[outcome] = 0
+    end
+    @questions.each do |question|
+      outcome_scores[question.answer.outcome] += question.answer.factor
+    end
+    outcome_scores.sort_by { |key, value| value } .first[0]
   end
 
   def completed?
@@ -23,8 +37,11 @@ class QuizState
   end
 
   def next_question
-    #this is the one that starts to feel magical
     @questions.find(&:answered?)
+  end
+
+  def result
+    compute_outcome
   end
 
 end

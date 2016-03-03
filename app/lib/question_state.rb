@@ -1,3 +1,4 @@
+require "choice_state"
 class NoAnswer
 end
 

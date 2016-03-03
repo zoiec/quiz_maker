@@ -13,9 +13,13 @@ feature "Complete a quiz" do
 
   scenario "finish the rest of the quiz" do
     quiz = setup_quiz
-
-    visit new_question_answer_path(quiz.first_question)
-    answer_question quiz.first_question
+    user = create_user
+    until(quiz.completed? user)
+      current_question = quiz.next_question user
+      visit new_question_answer_path(current_question)
+      answer_question(current_question)
+    end
+    expect(Result.includes(:outcome).includes(:quiz).where("quizzes.id = ? AND user_id = ?", quiz.id, user.id).references(:quizzes)).not_to be_empty
   end
 
 
@@ -23,6 +27,12 @@ feature "Complete a quiz" do
     quiz = FactoryGirl.create(:quiz)
     quiz.questions << create_question(5)
     quiz
+  end
+
+  def create_user
+    user = FactoryGirl.create(:user)
+    login_as(user)
+    user
   end
 
   def create_question num_choices
