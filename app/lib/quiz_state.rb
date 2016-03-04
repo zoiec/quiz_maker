@@ -1,5 +1,4 @@
 require_relative "question_state"
-require "byebug"
 
 class QuizState
 
