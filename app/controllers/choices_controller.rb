@@ -2,6 +2,7 @@ class ChoicesController < ApplicationController
 
   def edit
     @choice = Choice.find(params[:id])
+    @question = @choice.question
   end
 
   def new

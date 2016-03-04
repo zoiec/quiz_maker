@@ -1,3 +1,17 @@
 %h1 Edit Choice
+%h4= @question.body << " > " <<  @choice.body
+%table
+  %tr
+    %th
+      Outcome ID
+    %th
+      Strength
+  - @choice.weights.each do |weight|
+    %tr
+      %td
+        = weight.outcome_id
+      %td
+        = weight.strength
+
 
 =link_to "Add Weight", new_choice_weight_path(@choice), class: 'button'
