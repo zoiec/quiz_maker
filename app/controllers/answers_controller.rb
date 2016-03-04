@@ -13,7 +13,7 @@ class AnswersController < ApplicationController
       if(@quiz.completed? current_user)
         redirect_to quiz_result_path(@quiz.id)
       else
-        redirect_to new_question_answer_path(@question.next_question.id)
+        redirect_to new_question_answer_path(@quiz.next_question(current_user))
       end
     else
       render :new

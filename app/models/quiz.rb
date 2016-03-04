@@ -23,7 +23,7 @@ class Quiz < ActiveRecord::Base
         end
       end
     end
-    outcome_id = outcome_totals.sort { |key, value| value }.first[0]
+    outcome_id = outcome_totals.sort.first[0]
     Result.create(user: user, outcome_id: outcome_id)
   end
 
