@@ -24,7 +24,7 @@ class QuizzesController < ApplicationController
   end
 
   def edit
-    @quiz = Quiz.find(params[:id])
+    @quiz = Quiz.includes(:outcomes, questions: { choices: :weights }).find(params[:id])
   end
   private
 

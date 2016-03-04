@@ -18,6 +18,8 @@ gem 'pundit'
 
 group :development, :test do
   gem 'byebug'
+  gem 'bullet'
+  gem 'rack-mini-profiler'
 end
 
 group :test do

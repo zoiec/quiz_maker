@@ -9,9 +9,24 @@
 =link_to "Add Outcome", new_quiz_outcome_path(@quiz.id), class: 'button'
       
 %h2 Questions
-%table
+%ul.accordion{ "data-accordion" =>  "", role: :tablist }
   -@quiz.questions.each do |question|
-    %tr
-      %td= question.body
-      %td= link_to "Edit Question", edit_question_path(question.id), class: 'small button no-margin'
+    %li.accordion-item{ "data-accordion-item" => "" }
+      %a.accordion-title{ href: "#question-#{question.id}", role: "tab", id: "question-#{question.id}-heading"}
+        = question.body
+        %span.secondary.label
+          = question.choices.count
+          Choices
+      .accordion-content{ id: "question-#{question.id}", role: "tabpanel", "data-tab-content" => "", "aria-labelledby" => "question-#{question.id}-heading" }
+        %ul
+          - question.choices.each do |choice|
+            %li
+              = choice.body
+              -if choice.weighted?
+                %span.label.secondary
+                  Weighted
+              -else
+                %span.label.warning
+                  Unweighted
+        .clearfix= link_to "Edit Question", edit_question_path(question), { class: "button float-right" }
 =link_to "Add Question", new_quiz_question_path(@quiz.id), class: 'button'

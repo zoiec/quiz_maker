@@ -6,4 +6,8 @@ class Choice < ActiveRecord::Base
   validates :question, presence: true
   validates :body, presence: true
 
+  def weighted?
+    !weights.empty?
+  end
+
 end
