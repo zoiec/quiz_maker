@@ -2,6 +2,7 @@ class WeightsController < ApplicationController
 
   def new
     @choice = Choice.find(params[:choice_id])
+    @quiz = @choice.quiz
     @weight = Weight.new
   end
 

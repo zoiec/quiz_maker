@@ -1,3 +1,5 @@
 %h1 New Weight
-
-
+= simple_form_for [@choice, @weight] do |form|
+  = form.association :outcome, collection: @quiz.outcomes
+  = form.input :strength
+  = form.submit "Create Weight"
