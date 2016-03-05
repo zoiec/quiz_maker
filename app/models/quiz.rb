@@ -1,4 +1,6 @@
 class Quiz < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :slug, use: :slugged
   has_many :outcomes
   has_many :questions
   has_many :choices, through: :questions
@@ -13,7 +15,7 @@ class Quiz < ActiveRecord::Base
 
   def compute_result user
     outcome_totals = {}
-    answers = Answer.where(user: user, choice: choices).includes(:choice)
+    answers = Answer.where(user: user, choice: choices).includes(choice: :weights)
     answers.each do |answer|
       answer.weights.each do |weight|
         if(outcome_totals.has_key? weight.outcome_id)

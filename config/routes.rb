@@ -16,5 +16,6 @@ Rails.application.routes.draw do
     resources :weights, only: [:new, :create]
   end
   resources :outcomes, only: [:edit]  
+  get "/:id/", to: "quizzes#show"
 
 end

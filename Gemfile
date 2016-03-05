@@ -15,6 +15,7 @@ gem 'simple_form'
 gem 'foundation-rails'
 gem 'devise'
 gem 'pundit'
+gem 'friendly_id'
 
 group :development, :test do
   gem 'byebug'
