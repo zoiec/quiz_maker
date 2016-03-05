@@ -2,6 +2,7 @@ class AnswersController < ApplicationController
 
   def new
     @question = Question.find(params[:question_id])
+    @previous_answer = Answer.where(choice: @question.choices, user: current_user).order(created_at: :desc).limit(1).first.choice
     @answer = Answer.new
   end
 
