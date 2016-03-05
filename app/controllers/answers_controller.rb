@@ -2,7 +2,8 @@ class AnswersController < ApplicationController
 
   def new
     @question = Question.find(params[:question_id])
-    @previous_answer = Answer.where(choice: @question.choices, user: current_user).order(created_at: :desc).limit(1).first.choice
+    previous_answer = Answer.where(choice: @question.choices, user: current_user).order(created_at: :desc).limit(1).first
+    @previous_choice_id = (previous_answer.nil? ? "" : previous_answer.choice.id)
     @answer = Answer.new
   end
 
@@ -12,7 +13,7 @@ class AnswersController < ApplicationController
     @answer = Answer.new(answer_params)
     if(@answer.save)
       if(@quiz.completed? current_user)
-        redirect_to quiz_result_path(@quiz.id)
+        redirect_to quiz_result_path(@quiz)
       else
         redirect_to new_question_answer_path(@quiz.next_question(current_user))
       end

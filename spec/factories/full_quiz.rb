@@ -1,5 +1,6 @@
 def setup_full_quiz
   quiz = FactoryGirl.create(:quiz, 
+                            slug: "naughty-or-nice",
                             title: "Naughty or Nice?",
                             intro_content: "What will YOU be getting for christmas?") 
   outcomes = [FactoryGirl.create(:outcome, 

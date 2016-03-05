@@ -1,14 +1,14 @@
 class ResultsController < ApplicationController
 
   def show
-    @quiz = Quiz.find(params[:quiz_id])
+    @quiz = Quiz.friendly.find(params[:quiz_id])
     #this is wrong. Handling later
     @result = result_for_quiz(@quiz) || @quiz.compute_result(current_user)
     @outcome = @result.outcome
   end
 
   def create
-    @quiz = Quiz.find(params[:quiz_id])
+    @quiz = Quiz.friendly.find(params[:quiz_id])
     @result = @quiz.compute_result(current_user)
     @outcome = @result.outcome
   end

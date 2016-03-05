@@ -1,4 +1,4 @@
 %h1= @question.body
 = simple_form_for [@question, @answer] do |form|
-  = form.collection_radio_buttons :choice_id, @question.choices, :id, :body, {checked: @previous_answer.id }
+  = form.collection_radio_buttons :choice_id, @question.choices, :id, :body, {checked: @previous_choice_id}
   = form.submit "Next"

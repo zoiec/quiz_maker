@@ -13,7 +13,7 @@ RSpec.feature "Admin creates quiz" do
     
     visit new_quiz_path
     fill_in "Title", with: title
-    fill_in "Url", with: Faker::Internet.slug
+    fill_in "Slug", with: Faker::Internet.slug
     fill_in "Intro content", with: Faker::Lorem.paragraph 
 
     click_on("Create Quiz")

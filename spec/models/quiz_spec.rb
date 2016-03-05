@@ -7,13 +7,13 @@ RSpec.describe Quiz, type: :model do
   end
   
   it 'fails to validate if title is blank' do
-    quiz = Quiz.new(title: '', url: Faker::Internet.slug)
+    quiz = Quiz.new(title: '', slug: Faker::Internet.slug)
 
     expect(quiz.save).to be(false)
   end
 
-  it 'fails to validate if url is blank' do
-    quiz = Quiz.new(title: Faker::Lorem.sentence, url: '')
+  it 'fails to validate if slug is blank' do
+    quiz = Quiz.new(title: Faker::Lorem.sentence, slug: '')
 
     expect(quiz.save).to be(false)
   end

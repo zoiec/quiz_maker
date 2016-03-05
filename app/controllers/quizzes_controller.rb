@@ -28,12 +28,12 @@ class QuizzesController < ApplicationController
   end
 
   def edit
-    @quiz = Quiz.includes(:outcomes, questions: { choices: :weights }).find(params[:id])
+    @quiz = Quiz.includes(:outcomes, questions: { choices: :weights }).friendly.find(params[:id])
   end
   private
 
   def quiz_params
-    params.require(:quiz).permit(:url, :title, :intro_content)
+    params.require(:quiz).permit(:slug, :title, :intro_content)
   end
 
 end

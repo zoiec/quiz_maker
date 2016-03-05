@@ -5,7 +5,7 @@ class Quiz < ActiveRecord::Base
   has_many :questions
   has_many :choices, through: :questions
   validates :title, presence: true
-  validates :url, presence: true
+  validates :slug, presence: true
 
   scope :published, -> { where(published: true) }
 
