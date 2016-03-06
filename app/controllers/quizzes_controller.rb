@@ -8,6 +8,7 @@ class QuizzesController < ApplicationController
   def create
     @quiz = Quiz.new(quiz_params)
     if @quiz.save
+      @new_question = Question.new(quiz: @quiz)
       flash[:notice] = "Quiz created"
       render :edit, status: 201
     else
@@ -29,6 +30,7 @@ class QuizzesController < ApplicationController
 
   def edit
     @quiz = Quiz.includes(:outcomes, questions: { choices: :weights }).friendly.find(params[:id])
+    @new_question = Question.new(quiz: @quiz)
   end
   private
 
