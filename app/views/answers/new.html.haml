@@ -1,4 +1,4 @@
 %h1= @question.body
 = simple_form_for [@question, @answer] do |form|
-  = form.association :choice, as: :radio_buttons, label_method: :body
+  = form.association :choice, collection: @question.choices, as: :radio_buttons, label_method: :body
   = form.submit "Next"
