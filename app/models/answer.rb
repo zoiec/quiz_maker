@@ -3,4 +3,5 @@ class Answer < ActiveRecord::Base
   has_one :question, through: :choice
   has_many :weights, through: :choice
   belongs_to :user
+  validates :choice, presence: true
 end
