@@ -99,6 +99,8 @@ SimpleForm.setup do |config|
   # the nested label
   config.item_wrapper_tag = :div
 
+  config.boolean_style = :nested
+
   # CSS class to add for error notification helper.
   config.error_notification_class = 'alert-box alert'
 
