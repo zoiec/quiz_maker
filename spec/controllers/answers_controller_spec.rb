@@ -14,7 +14,7 @@ describe AnswersController, type: :controller do
 
   def setup_quiz
     quiz = FactoryGirl.create(:quiz)
-    question = FactoryGirl.create(:question)
+    question = FactoryGirl.create(:question, quiz: quiz)
     choice = FactoryGirl.create(:choice, question: question)
     quiz.questions << question
     quiz

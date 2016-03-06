@@ -18,6 +18,14 @@ RSpec.feature 'Admin adds an answer to a question' do
 
   end
 
-  scenario 'unsuccessfully with invalid data'
+  scenario 'unsuccessfully with invalid data' do
+    visit edit_question_path(question.id)
+
+    click_on "Add Choice"
+    click_on "Create Choice"
+
+    expect(question.choices.count).to eq(0)
+    expect(page).to have_content("can't be blank")
+  end
 
 end

@@ -14,7 +14,7 @@ RSpec.describe WeightsController do
   end
   
   it 'responds to the create action' do
-    weight_attrs = FactoryGirl.attributes_for(:weight, choice: choice)
+    weight_attrs = FactoryGirl.build(:weight, choice: choice).attributes
 
     post :create, choice_id: choice.id, weight: weight_attrs
 

@@ -5,7 +5,7 @@ class Quiz < ActiveRecord::Base
   has_many :questions
   has_many :choices, through: :questions
   validates :title, presence: true
-  validates :slug, presence: true
+  validates :slug, presence: true, uniqueness: true, format: { with: /\A[\da-zA-Z\-_]*\z/ }
 
   scope :published, -> { where(published: true) }
 

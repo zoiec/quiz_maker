@@ -30,14 +30,28 @@ RSpec.describe Quiz, type: :model do
 
   it 'is incomplete for a new user' do
     quiz = FactoryGirl.create(:quiz)
-    quiz.questions << FactoryGirl.create(:question)
+    FactoryGirl.create(:question, quiz: quiz)
     user = FactoryGirl.create(:user)
 
     expect(quiz.completed? user).to eq(false)
   end
 
-  it 'fails to validate if slug contains spaces'
+  it 'fails to validate if slug contains spaces' do
+    quiz = FactoryGirl.build(:quiz, slug: "my new slug")
 
-  it 'fails to validate if slug is not unique'
+    expect(quiz.save).to be(false)
+  end
 
+  it 'fails to validate if slug is not unique' do
+    quiz = FactoryGirl.create(:quiz, slug: "dup_slug")
+    quiz = FactoryGirl.build(:quiz, slug: "dup_slug")
+
+    expect(quiz.save).to be(false)
+  end
+
+  it 'fails to validate if slug contains periods' do
+    quiz = FactoryGirl.build(:quiz, slug: "my.new.slug")
+
+    expect(quiz.save).to be(false)
+  end
 end

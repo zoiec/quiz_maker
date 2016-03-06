@@ -10,14 +10,24 @@ RSpec.feature "User adds a question to a quiz" do
   let(:quiz) { FactoryGirl.create(:quiz) }
 
   scenario "successfully with valid data" do
-    visit edit_quiz_path quiz
+    question_body = Faker::Lorem.sentence
+    visit edit_quiz_path(quiz)
     click_on "Add Question"
 
-    fill_in "Body", with: Faker::Lorem.sentence
+    fill_in "Body", with: question_body
     click_on "Create Question"
+
+    expect(Question.all.count).to be(1)
+    expect(page).to have_content(question_body)
   end
 
-  scenario "unsuccessfully with invalid data"
+  scenario "unsuccessfully with invalid data" do
+    visit edit_quiz_path quiz
+    click_on "Add Question"
+    click_on "Create Question"
 
+    expect(Question.all.count).to be(0)
+    expect(page).to have_content("can't be blank")
+  end
 
 end
