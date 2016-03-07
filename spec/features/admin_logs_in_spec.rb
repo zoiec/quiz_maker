@@ -2,11 +2,10 @@ require 'rails_helper'
 
 feature 'Admin logs in' do
 
-  let(:user) { FactoryGirl.create(:user) }
+  scenario 'by visiting the login page directly' do
+    user = FactoryGirl.create(:user, admin: true)
 
-  scenario 'from the home page' do
-
-    visit root_path
+    visit new_user_session_path
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
     click_on 'Log in'

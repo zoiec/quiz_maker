@@ -2,21 +2,22 @@ class QuizzesController < ApplicationController
   before_action :require_login, except: [:show]
 
   def new
+    authorize :quiz
     @quiz = Quiz.new
   end
 
   def create
+    authorize :quiz
     @quiz = Quiz.new(quiz_params)
     if @quiz.save
-      @new_question = Question.new(quiz: @quiz)
-      flash[:notice] = "Quiz created"
-      render :edit, status: 201
+      redirect_to edit_quiz_path(@quiz)
     else
       render :new, status: 422
     end
   end
 
   def index
+    authorize :quiz
     @quizzes = Quiz.all
   end
 

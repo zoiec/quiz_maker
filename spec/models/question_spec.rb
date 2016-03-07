@@ -22,5 +22,14 @@ RSpec.describe Question, type: :model do
 
   end
 
+  it 'is given an order when it is added to a quiz' do
+    quiz = FactoryGirl.create(:quiz)
+    question_1 = FactoryGirl.create(:question, quiz: quiz)
+    question_2 = FactoryGirl.create(:question, quiz: quiz)
+
+    expect(question_1.order).to eq(1)
+    expect(question_2.order).to eq(2)
+  end
+
 
 end
