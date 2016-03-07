@@ -12,11 +12,7 @@ class AnswersController < ApplicationController
     @quiz = @question.quiz
     @answer = Answer.new(answer_params)
     if(@answer.save)
-      if(@quiz.completed? current_user)
-        redirect_to quiz_result_path(@quiz)
-      else
-        redirect_to new_question_answer_path(@quiz.next_question(current_user))
-      end
+      redirect_to next_step(current_user, @question, @quiz)
     else
       render :new
     end
@@ -26,5 +22,14 @@ class AnswersController < ApplicationController
 
   def answer_params
     params.require(:answer).permit(:choice_id).merge(user_id: current_user.id)
+  end
+  
+  def next_step(user, question, quiz)
+    next_question = question.next_question
+    if(!next_question)
+      quiz_result_path(quiz)
+    else
+      new_question_answer_path(next_question)
+    end
   end
 end

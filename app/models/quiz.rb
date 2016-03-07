@@ -37,6 +37,8 @@ class Quiz < ActiveRecord::Base
     !questions_left? user
   end
 
+  private
+
   def questions_left?(user)
     unanswered_questions(user).count > 0
   end
@@ -49,8 +51,9 @@ class Quiz < ActiveRecord::Base
     questions.select { |q| !q.answered(user) }
   end
 
-  def next_question(user)
+  def next_unanswered_question(user)
     questions.find { |q| !q.answered(user) }
   end
+
 
 end

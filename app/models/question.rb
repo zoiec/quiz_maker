@@ -11,7 +11,7 @@ class Question < ActiveRecord::Base
   end
 
   def next_question
-    Question.where(quiz: self.quiz, order: order + 1)
+    Question.where(quiz: self.quiz, order: order + 1).first
   end
 
   def set_order
