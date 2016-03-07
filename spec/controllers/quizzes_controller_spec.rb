@@ -121,8 +121,7 @@ RSpec.describe QuizzesController, type: :controller, focus: false do
     it "doesn't allow non-admin users access" do
       devise_login_as_user
 
-      expect { get :index } .to raise_pundit_exception
-    end
+      expect { get :index } .to raise_pundit_exception end
   end
 
   context '#show' do
@@ -148,6 +147,33 @@ RSpec.describe QuizzesController, type: :controller, focus: false do
       get :show, id: quiz.id
 
       expect(assigns(:quiz)).to eq(quiz)
+    end
+  end
+
+  context "#edit" do
+    it "renders the edit template" do
+      devise_login_as_admin
+      quiz = FactoryGirl.create(:quiz)
+
+      get :edit, id: quiz.id
+
+      expect(response).to render_template(:edit)
+    end
+
+    it "returns 200" do
+      devise_login_as_admin
+      quiz = FactoryGirl.create(:quiz)
+
+      get :edit, id: quiz.id
+
+      expect(response).to have_http_status(200)
+    end
+
+    it "does not allow a non-admin user access" do
+      devise_login_as_user
+      quiz = FactoryGirl.create(:quiz)
+
+      expect { get :edit, id: quiz.id } .to raise_pundit_exception
     end
   end
 

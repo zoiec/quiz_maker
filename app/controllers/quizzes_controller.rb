@@ -32,6 +32,7 @@ class QuizzesController < ApplicationController
   def edit
     @quiz = Quiz.includes(:outcomes, questions: { choices: :weights }).friendly.find(params[:id])
     @new_question = Question.new(quiz: @quiz)
+    authorize @quiz
   end
   private
 
