@@ -2,3 +2,6 @@
 = simple_form_for [@question, @answer] do |form|
   = form.association :choice, collection: @question.choices, as: :radio_buttons, label_method: :body, checked: @previous_choice_id
   = form.submit "Next"
+%hr
+%h1 React Version
+= react_component('Question', question: @question, choices: @question.choices)

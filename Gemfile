@@ -15,6 +15,7 @@ gem 'foundation-rails'
 gem 'devise'
 gem 'pundit'
 gem 'friendly_id'
+gem 'react-rails', '~> 1.6.0'
 
 group :development, :test do
   gem 'byebug'
