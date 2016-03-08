@@ -22,3 +22,22 @@
     border-color: #777;
   }
 }
+
+
+.non-selected-answer
+{
+  border: 1px solid #eee;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.1s ease-in-out all;
+  -webkit-transition: 0.1s ease-in-out all;
+  color: #818181;
+  }
+.selected-answer
+{
+  border: 1px solid #d7dada;
+  color: #000;
+  background: #f7f7f7;
+}

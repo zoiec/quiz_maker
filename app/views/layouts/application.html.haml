@@ -17,9 +17,10 @@
           =log_in_button
 
     .container
-      .columns.small-10.small-push-1
-        -if notice.present?
-          %p.callout.success= notice
-        -if alert.present?
-          %p.callout.alert= alert
-        = yield
+      .row
+        .columns.small-10.small-push-1
+          -if notice.present?
+            %p.callout.success= notice
+          -if alert.present?
+            %p.callout.alert= alert
+          = yield
