@@ -12,10 +12,9 @@ RSpec.feature "User adds a question to a quiz" do
   scenario "successfully with valid data" do
     question_body = Faker::Lorem.sentence
     visit edit_quiz_path(quiz)
-    click_on "Add Question"
 
     fill_in "Body", with: question_body
-    click_on "Create Question"
+    click_on "Save"
 
     expect(Question.all.count).to be(1)
     expect(page).to have_content(question_body)
@@ -23,8 +22,7 @@ RSpec.feature "User adds a question to a quiz" do
 
   scenario "unsuccessfully with invalid data" do
     visit edit_quiz_path quiz
-    click_on "Add Question"
-    click_on "Create Question"
+    click_on "Save"
 
     expect(Question.all.count).to be(0)
     expect(page).to have_content("can't be blank")
