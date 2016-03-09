@@ -23,10 +23,6 @@ class QuizzesController < ApplicationController
 
   def show
     @quiz = Quiz.friendly.find(params[:id])
-    has_completed = !Result.where(outcome: @quiz.outcomes, user: current_user).empty?
-    if(has_completed)
-      flash.now[:alert] = "Just FYI: You have already completed this quiz, so your result won't change"
-    end
   end
 
   def edit
