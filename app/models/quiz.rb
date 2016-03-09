@@ -15,7 +15,7 @@ class Quiz < ActiveRecord::Base
 
   def compute_result user
     outcome_totals = {}
-    answers = Answer.where(user: user, choice: choices).includes(choice: :weights)
+    answers = Answer.includes(:weights).where(user: user, choice: choices)
     answers.each do |answer|
       answer.weights.each do |weight|
         if(outcome_totals.has_key? weight.outcome_id)
@@ -26,7 +26,13 @@ class Quiz < ActiveRecord::Base
       end
     end
     outcome_id = outcome_totals.sort.first[0]
-    Result.create(user: user, outcome_id: outcome_id)
+    result = Result.where(outcome: outcomes, user: user).first
+    if(result.nil?)
+      Result.create(user: user, outcome_id: outcome_id)
+    else
+      result.update_attribute(:outcome_id, outcome_id)
+      result
+    end
   end
 
   def first_question
