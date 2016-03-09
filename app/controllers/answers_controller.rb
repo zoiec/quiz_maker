@@ -3,8 +3,27 @@ class AnswersController < ApplicationController
   def new
     @question = Question.find(params[:question_id])
     previous_answer = Answer.where(choice: @question.choices, user: current_user).order(created_at: :desc).limit(1).first
-    @previous_choice_id = (previous_answer.nil? ? "" : previous_answer.choice.id)
-    @answer = Answer.new
+    if(previous_answer)
+      redirect_to edit_answer_path(previous_answer)
+    else
+      @answer = Answer.new
+    end
+  end
+
+  def edit
+    @answer = Answer.find(params[:id])
+    @question = @answer.question
+  end
+
+  def update
+    @answer = Answer.find(params[:id])
+    @question = @answer.question
+    @quiz = @question.quiz
+    if(@answer.update_attributes(answer_params))
+      redirect_to next_step(current_user, @question, @quiz)
+    else
+      render :edit
+    end
   end
 
   def create

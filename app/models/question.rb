@@ -1,6 +1,8 @@
 class Question < ActiveRecord::Base
   has_many :choices
   has_many :answers, through: :choices
+  has_attached_file :picture
+  validates_attachment :picture, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
   belongs_to :quiz
   validates :body, presence: true
   validates :quiz, presence: true
