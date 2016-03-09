@@ -7,12 +7,14 @@ class AnswersController < ApplicationController
       redirect_to edit_answer_path(previous_answer)
     else
       @answer = Answer.new
+      @previous_question_answer = Answer.includes(:choice).where(choices: { question_id: @question.previous_question }, user: current_user).references(:choices).first
     end
   end
 
   def edit
     @answer = Answer.find(params[:id])
     @question = @answer.question
+    @previous_question_answer = Answer.includes(:choice).where(choices: { question_id: @question.previous_question }, user: current_user).references(:choices).first
   end
 
   def update

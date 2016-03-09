@@ -1,4 +1,6 @@
 %h1= @question.body
 = simple_form_for @answer do |form|
   = form.association :choice, collection: @question.choices, as: :radio_buttons, label_method: :body, checked: @answer.choice_id, label: false
+  - unless @previous_question_answer.nil?
+    = link_to "Previous", edit_answer_path(@previous_question_answer), class: "button float-left"
   = form.submit "Next", class: "button float-right"

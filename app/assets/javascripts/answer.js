@@ -7,6 +7,7 @@ var answer_ready = function(event) {
     labels.removeClass('selected');
     target = $(event.target);
     target.closest('label').addClass('selected');
+    target.closest('form').submit();
   })
 
   labels.children('input[type="radio"]').focus(function(event) {

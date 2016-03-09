@@ -16,6 +16,10 @@ class Question < ActiveRecord::Base
     Question.where(quiz: self.quiz, order: order + 1).first
   end
 
+  def previous_question
+    Question.where(quiz: self.quiz, order: order - 1).first
+  end
+
   def set_order
     max_order = Question.where(quiz: self.quiz).maximum(:order) || 0
     self.update_attribute(:order, max_order + 1)
