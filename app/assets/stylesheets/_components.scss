@@ -11,33 +11,39 @@
 {
   background-color: #8C8CEE;
 }
+//Make the labels for choices more like buttons
 .answer_choice .radio label
 {
   border: 1px solid #eee;
-  border-radius: 4px;
-  padding: 10px;
-  margin-bottom: 5px;
-  &:hover
-  {
-    border-color: #777;
-  }
-}
-
-
-.non-selected-answer
-{
-  border: 1px solid #eee;
   padding: 10px 20px;
+  padding-left: 5px;
   margin-bottom: 10px;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.1s ease-in-out all;
   -webkit-transition: 0.1s ease-in-out all;
   color: #818181;
+  background: #fff;
+  &:hover
+  {
+    border: 1px solid #d7dada;
   }
-.selected-answer
-{
-  border: 1px solid #d7dada;
-  color: #000;
-  background: #f7f7f7;
+  &.selected
+  {
+    border: 1px solid #d7dada;
+    color: #000;
+    background: #f7f7f7;
+  }
+  //Keep the elements displayed so that they will still be stopped on when
+  //users tab to them
+  input[type="radio"]
+  {
+    position: relative;
+    z-index: -1;
+    margin:0px;
+  }
+  &.label-focus
+  {
+    box-shadow: 0px 0px 5px #8C8CEE;
+  }
 }
