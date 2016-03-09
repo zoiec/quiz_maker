@@ -1,2 +1,17 @@
-%h1 Results for Quiz
-= @outcome.name
+%h1= @outcome.name
+- if @outcome.picture.file?
+  .row
+    .columns.small-12.text-center
+      = image_tag @outcome.picture
+= @outcome.body
+%hr
+.row
+  .columns.small-12.large-4.text-center
+    .button
+      Facebook share button
+  .columns.small-12.large-4.text-center
+    .button
+      Twitter share button
+  .columns.small-12.large-4.text-center
+    .button
+      Email share button

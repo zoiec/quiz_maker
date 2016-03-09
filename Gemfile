@@ -16,6 +16,8 @@ gem 'foundation-rails'
 gem 'devise'
 gem 'pundit'
 gem 'friendly_id'
+gem 'paperclip'
+
 
 group :development, :test do
   gem 'byebug'

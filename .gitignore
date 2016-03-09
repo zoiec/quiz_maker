@@ -17,3 +17,6 @@
 !/log/.keep
 /tmp
 *.swp
+
+# Ignore local paperclip attachments
+/public/system/

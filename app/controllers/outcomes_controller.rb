@@ -19,10 +19,20 @@ class OutcomesController < ApplicationController
     @outcome = Outcome.find(params[:id])
   end
 
+  def update
+    @outcome = Outcome.find(params[:id])
+    @quiz = @outcome.quiz
+    if(@outcome.update_attributes(outcome_params))
+      redirect_to edit_quiz_path(@outcome.quiz)
+    else
+      render :edit
+    end
+  end
+
   private
 
   def outcome_params
-    params.require(:outcome).permit(:body, :name).merge(quiz: @quiz) 
+    params.require(:outcome).permit(:body, :name, :picture).merge(quiz: @quiz) 
   end
 
 end
