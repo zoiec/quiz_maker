@@ -3,3 +3,10 @@ input[type="checkbox"], input[type="radio"]
   margin-bottom: 0px;
   margin-right: 10px;
 }
+button, .button
+{
+  border-radius: 4px;
+  border: 1px solid rgba(0,0,0,.1);
+  text-shadow: 0px 1px rgba(0,0,0,.1);
+  font-weight: 600;
+}

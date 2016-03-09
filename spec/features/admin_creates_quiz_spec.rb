@@ -7,7 +7,8 @@ RSpec.feature "Admin creates quiz" do
   scenario "succesfully with valid information" do
     warden_login_as_admin
 
-    visit new_quiz_path
+    visit root_path
+    click_on "New Quiz"
     fill_in "Title", with: title
     fill_in "Slug", with: Faker::Internet.slug
     fill_in "Intro content", with: Faker::Lorem.paragraph 

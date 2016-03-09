@@ -3,13 +3,13 @@
 %table
   %tr
     %th
-      Outcome ID
+      Outcome Title
     %th
       Strength
   - @choice.weights.each do |weight|
     %tr
       %td
-        = weight.outcome_id
+        = weight.outcome.name
       %td
         = weight.strength
 
