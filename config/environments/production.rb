@@ -76,4 +76,14 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  #store paperclip stuff in S3 using bucketeer
+  config.paperclip_defaults = {
+      :storage => :s3,
+      :s3_credentials => {
+      :bucket => ENV['BUCKETEER_BUCKET_NAME'],
+      :access_key_id => ENV['BUCKETEER_AWS_ACCESS_KEY_ID'],
+      :secret_access_key => ENV['BUCKETEER_AWS_SECRET_ACCESS_KEY']
+    }
+  }
 end
