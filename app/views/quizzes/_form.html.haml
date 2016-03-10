@@ -1,0 +1,5 @@
+= simple_form_for @quiz do |form|
+  = form.input :title
+  = form.input :slug
+  = form.input :intro_content
+  = form.submit local_assigns.fetch(:button, "Save"), class: "button float-right"

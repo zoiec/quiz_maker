@@ -1,6 +1,3 @@
-%h1 New Quiz 
-=simple_form_for @quiz do |form|
-  =form.input :title
-  =form.input :slug
-  =form.input :intro_content
-  =form.submit "Create Quiz"
+.panel.clearfix.clearfix.mt2
+  %h4 New Quiz
+  = render "form", button: "Create Quiz"

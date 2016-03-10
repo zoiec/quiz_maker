@@ -31,6 +31,16 @@ class QuizzesController < ApplicationController
     authorize @quiz
   end
 
+  def update
+    @quiz = Quiz.friendly.find(params[:id])
+    authorize @quiz
+    if(@quiz.update_attributes(quiz_params))
+      redirect_to edit_quiz_path @quiz
+    else
+      render :edit
+    end
+  end
+
   def destroy
     @quiz = Quiz.friendly.find(params[:id])
     authorize @quiz

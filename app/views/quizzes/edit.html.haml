@@ -1,38 +1,55 @@
-%h1= @quiz.title
-%p= @quiz.intro_content
-%h2 Outcomes
-%table
-  -@quiz.outcomes.each do |outcome|
-    %tr
-      %td= outcome.name
-      %td= link_to "Edit Outcome", edit_outcome_path(outcome), class: "small button no-margin"
-=link_to "Add Outcome", new_quiz_outcome_path(@quiz.id), class: 'button float-right'
-
-%h2 Questions
-%ul.accordion.no-margin{ "data-accordion" =>  "", role: :tablist }
-  -@quiz.questions.each do |question|
-    %li.accordion-item{ "data-accordion-item" => "" }
-      %a.accordion-title{ href: "#question-#{question.id}", role: "tab", id: "question-#{question.id}-heading"}
-        = question.body
-        %span.secondary.label
-          = question.choices.count
-          Choices
-      .accordion-content{ id: "question-#{question.id}", role: "tabpanel", "data-tab-content" => "", "aria-labelledby" => "question-#{question.id}-heading" }
-        %ul
-          - question.choices.each do |choice|
-            %li
-              = choice.body
-              -if choice.weighted?
-                %span.label.secondary
-                  Weighted
-              -else
-                %span.label.warning
-                  Unweighted
-        .clearfix= link_to "Edit Question", edit_question_path(question), { class: "button float-right" }
-.callout
-  %h3 New Question
-  = simple_form_for [@quiz, @new_question] do |form|
-    = form.input :body
-    .clearfix
-      = form.submit "Save", class: "button float-right"
-=link_to "Delete Quiz", quiz_path(@quiz), class: "button alert float-right", data: {confirm: "Are you sure?"}, method: :delete
+.row
+  .small-12.columns
+    .panel.mt2.clearfix
+      %h4
+        Title:
+        = @quiz.title
+      %p
+        %strong
+          Slug:
+        = @quiz.slug
+      %p
+        %strong
+          Intro Content:
+        = @quiz.intro_content
+      %a.button.small.mx1.my0.float-right{data: {open: "edit-details-modal"}} Edit Details
+      = link_to "Delete Quiz", quiz_path(@quiz), class: "button small mx1 my0 alert float-right", data: {confirm: "Are you sure?"}, method: :delete
+      #edit-details-modal.reveal{data: { reveal: ""}}
+        = render "form"
+.row
+  .columns.small-12.medium-6
+    .panel.clearfix
+      %h4 Outcomes
+      -@quiz.outcomes.each do |outcome|
+        .row
+          .columns.small-12
+            .panel.clearfix
+              = outcome.name
+              = link_to "Edit Outcome", edit_outcome_path(outcome), class: "float-right tiny button m0"
+      = link_to "Add Outcome", new_quiz_outcome_path(@quiz.id), class: "button float-right small"
+  .columns.small-12.medium-6
+    .panel.clearfix
+      %h4 Questions
+      -@quiz.questions.each do |question|
+        .panel.clearfix
+          = question.body
+          %span.secondary.label
+            = question.choices.count
+            Choices
+          %ul
+            - question.choices.each do |choice|
+              %li
+                = choice.body
+                -if choice.weighted?
+                  %span.label.secondary
+                    Weighted
+                -else
+                  %span.label.warning
+                    Unweighted
+          .clearfix= link_to "Edit Question", edit_question_path(question), { class: "button float-right small" }
+      .panel.clearfix
+        %h4 New Question
+        = simple_form_for [@quiz, @new_question] do |form|
+          = form.input :body
+          .clearfix
+            = form.submit "Create Question", class: "button float-right"

@@ -3,21 +3,34 @@ Rails.application.routes.draw do
   devise_for :users
   root 'quizzes#index'
 
-  resources :quizzes do
-    resources :outcomes, only: [:new, :create]
+
+  resources :quizzes, only: [:show, :update, :destroy]  do
     resource :result, only: [:show]
-    resources :questions, only: [:new, :create]
   end
-  resources :outcomes, only: [:edit, :update]
-  resources :questions, only: [:edit, :show] do
-    resources :choices, only: [:new, :create]
+
+  resources :questions, only: [:show] do
     resources :answers, only: [:new, :create]
   end
+
   resources :answers, only: [:edit, :update]
-  resources :choices, only: [:edit] do
-    resources :weights, only: [:new, :create]
+
+  scope :admin do
+    resources :quizzes, except: [:show, :update, :destroy]  do
+      resources :outcomes, only: [:new, :create]
+      resources :questions, only: [:new, :create]
+    end
+
+    resources :outcomes, only: [:edit, :update]
+
+    resources :questions, only: [:edit] do
+      resources :choices, only: [:new, :create]
+    end
+
+    resources :choices, only: [:edit] do
+      resources :weights, only: [:new, :create]
+    end
   end
-  resources :outcomes, only: [:edit]  
+
   get "/:id/", to: "quizzes#show"
 
 end

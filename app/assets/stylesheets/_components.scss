@@ -11,6 +11,20 @@
 {
   background-color: #8C8CEE;
 }
+.panel
+{
+  background-color: #e2e4e6;
+  border-radius: 3px;
+  color: #4d4d4d;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  .panel
+  {
+    background: #fff;
+    margin-bottom: 8px;
+  }
+}
 //Make the labels for choices more like buttons
 .answer_choice .radio label
 {

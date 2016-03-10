@@ -10,6 +10,10 @@ class QuizPolicy < ApplicationPolicy
     @user.admin?
   end
 
+  def update?
+    @user.admin?
+  end
+
   def new?
     @user.admin?
   end
