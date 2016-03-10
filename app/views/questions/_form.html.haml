@@ -1,0 +1,4 @@
+= simple_form_for [@quiz, @question] do |form|
+  = form.input :body
+  = form.input :picture, as: :file
+  = form.submit local_assigns.fetch(:button, "Save")

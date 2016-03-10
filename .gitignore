@@ -20,3 +20,5 @@
 
 # Ignore local paperclip attachments
 /public/system/
+/coverage
+*.DS_Store
