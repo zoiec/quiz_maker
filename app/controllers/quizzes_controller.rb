@@ -30,6 +30,15 @@ class QuizzesController < ApplicationController
     @new_question = Question.new(quiz: @quiz)
     authorize @quiz
   end
+
+  def destroy
+    @quiz = Quiz.friendly.find(params[:id])
+    authorize @quiz
+    @quiz.destroy
+    flash[:notice] = "Quiz destroyed successfully"
+    redirect_to quizzes_path
+  end
+
   private
 
   def quiz_params

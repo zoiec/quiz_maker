@@ -2,21 +2,54 @@ require "rails_helper"
 
 describe AnswersController, type: :controller do
 
-  it "creates an answer and redirects to the next question" do
-    devise_login_as_user
-    quiz = setup_quiz
-    answer = { choice_id: Choice.first.id }
+  describe "#new" do
+    it "assigns a new answer" do
+      devise_login_as_user
+      quiz = setup_quiz
 
-    post :create, question_id: quiz.questions.first.id, answer: answer
+      get :new, question_id: quiz.questions.first.id
 
-    expect(Answer.all.count).to eq(1)
+      expect(assigns(:answer)).to be_a_new(Answer)
+    end
+
+    it "does something if the user is not logged in"
+
+    it "forwards to edit if the user has already answered the question" do
+      devise_login_as_user
+      quiz = setup_quiz
+      answer = FactoryGirl.create(:answer, user: User.first, choice: Choice.first)
+
+      get :new, question_id: quiz.questions.first.id
+
+      expect(response).to redirect_to(edit_answer_path(answer))
+    end
   end
+
+  describe "#create" do
+    it "creates an answer" do
+      devise_login_as_user
+      quiz = setup_quiz
+      answer = { choice_id: Choice.first.id }
+
+      post :create, question_id: quiz.questions.first.id, answer: answer
+
+      expect(Answer.all.count).to eq(1)
+    end
+
+  end
+
+  describe "#edit" do
+    it "displays an answer"
+
+    it "does not display an answer if it's not the correct user"
+  end
+
+  it "does not allow users to alter each other's answers"
 
   def setup_quiz
     quiz = FactoryGirl.create(:quiz)
     question = FactoryGirl.create(:question, quiz: quiz)
     choice = FactoryGirl.create(:choice, question: question)
-    quiz.questions << question
     quiz
   end
 end
