@@ -17,6 +17,7 @@ gem 'devise'
 gem 'pundit'
 gem 'friendly_id'
 gem 'paperclip'
+gem 'aws-sdk'
 
 
 group :development, :test do
