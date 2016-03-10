@@ -1,3 +1,5 @@
+require "faker"
+
 FactoryGirl.define do
   factory :quiz do
     title Faker::Book.title

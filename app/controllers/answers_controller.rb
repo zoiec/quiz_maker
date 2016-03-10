@@ -15,11 +15,11 @@ class AnswersController < ApplicationController
     @answer = Answer.find(params[:id])
     authorize @answer
     @question = @answer.question
-    @previous_question_answer = Answer.includes(:choice).where(choices: { question_id: @question.previous_question }, user: current_user).references(:choices).first
   end
 
   def update
     @answer = Answer.find(params[:id])
+    authorize @answer
     @question = @answer.question
     @quiz = @question.quiz
     if(@answer.update_attributes(answer_params))

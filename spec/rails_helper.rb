@@ -29,6 +29,7 @@ end
 
 # Checks for pending migration and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
+SimpleCov.start
 ActiveRecord::Migration.maintain_test_schema!
 include Warden::Test::Helpers
 Warden.test_mode!

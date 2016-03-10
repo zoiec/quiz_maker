@@ -6,7 +6,7 @@ class AnswerPolicy < ApplicationPolicy
     super
   end
 
-  def edit?
+  def update?
     @answer.user == user
   end
 

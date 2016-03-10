@@ -30,4 +30,24 @@ RSpec.describe OutcomesController do
     expect(assigns(:outcome)).to eq(outcome)
     expect(response).to render_template(:edit)
   end
+
+  describe "#update" do
+    it "updates the outcome if the user is logged in as admin" do
+      devise_login_as_admin
+      outcome = FactoryGirl.create(:outcome)
+
+      post :update, id: outcome.id, outcome: { name: "New Name" } 
+
+      outcome.reload
+      expect(outcome.name).to eq("New Name")
+    end
+
+    it "raises an error if the user is not an admin" do
+      devise_login_as_user
+
+      outcome = FactoryGirl.create(:outcome)
+
+      expect { post :update, id: outcome.id, outcome: { name: "New Name" } } .to raise_exception(Pundit::NotAuthorizedError)
+    end
+  end
 end

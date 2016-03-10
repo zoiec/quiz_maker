@@ -21,6 +21,7 @@ class OutcomesController < ApplicationController
 
   def update
     @outcome = Outcome.find(params[:id])
+    authorize @outcome
     @quiz = @outcome.quiz
     if(@outcome.update_attributes(outcome_params))
       redirect_to edit_quiz_path(@outcome.quiz)

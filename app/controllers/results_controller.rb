@@ -6,17 +6,9 @@ class ResultsController < ApplicationController
     previous_result = result_for_quiz(@quiz)
     if(!previous_result.nil? && !previous_result.needs_recomputation?)
       @result = previous_result
-      @recomputed = false
     else
       @result = @quiz.compute_result(current_user)
-      @recomputed = true
     end
-    @outcome = @result.outcome
-  end
-
-  def create
-    @quiz = Quiz.friendly.find(params[:quiz_id])
-    @result = @quiz.compute_result(current_user)
     @outcome = @result.outcome
   end
 

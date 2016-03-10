@@ -24,6 +24,7 @@ group :development, :test do
   gem 'byebug'
   gem 'bullet'
   gem 'rack-mini-profiler'
+  gem 'simplecov'
 end
 
 group :test do
