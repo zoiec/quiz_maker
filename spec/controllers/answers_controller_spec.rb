@@ -41,7 +41,20 @@ describe AnswersController, type: :controller do
   describe "#edit" do
     it "displays an answer"
 
-    it "does not display an answer if it's not the correct user"
+    it "does not display an answer if it's not the correct user" do
+      user = FactoryGirl.create(:user)
+      devise_login_as_user
+      answer = FactoryGirl.create(:answer, user: user)
+
+      expect { get :edit, id: answer.id } .to raise_exception(Pundit::NotAuthorizedError)
+    end
+  end
+
+  describe "#update" do
+    it "updates the answer if it's the correct user"
+
+    it "does not update if it's not the correct user"
+
   end
 
   it "does not allow users to alter each other's answers"
