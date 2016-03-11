@@ -1,13 +1,13 @@
 class AnswersController < ApplicationController
 
   def new
+    handle_user_login
     @question = Question.find(params[:question_id])
-    previous_answer = Answer.where(choice: @question.choices, user: current_user).order(created_at: :desc).limit(1).first
+    previous_answer = previous_answer_for_user(current_user)
     if(previous_answer)
       redirect_to edit_answer_path(previous_answer)
     else
       @answer = Answer.new
-      @previous_question_answer = Answer.includes(:choice).where(choices: { question_id: @question.previous_question }, user: current_user).references(:choices).first
     end
   end
 
@@ -42,6 +42,15 @@ class AnswersController < ApplicationController
 
   private
 
+  def handle_user_login
+    unless(user_signed_in?)
+      user = User.create(email: Faker::Internet.email,
+                         password: Faker::Internet.password,
+                         guest: true)
+      sign_in(:user, user)
+    end
+  end
+
   def answer_params
     params.require(:answer).permit(:choice_id).merge(user_id: current_user.id)
   end
@@ -53,5 +62,10 @@ class AnswersController < ApplicationController
     else
       new_question_answer_path(next_question)
     end
+  end
+
+  def previous_answer_for_user user
+    Answer.where(choice: @question.choices,
+                 user: user).order(created_at: :desc).limit(1).first
   end
 end

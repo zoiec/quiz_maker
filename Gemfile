@@ -18,6 +18,7 @@ gem 'pundit'
 gem 'friendly_id'
 gem 'paperclip'
 gem 'aws-sdk', '< 2.0'
+gem 'faker'
 
 
 group :development, :test do
@@ -30,7 +31,6 @@ end
 group :test do
   gem 'rspec-rails'
   gem 'capybara'
-  gem 'faker'
   gem 'factory_girl'
 end
 
