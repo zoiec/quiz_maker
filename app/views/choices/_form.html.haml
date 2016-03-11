@@ -1,0 +1,3 @@
+= simple_form_for [@question, @choice] do |form|
+  = form.input :body
+  = form.submit local_assigns.fetch(:button, "Save")

@@ -2,6 +2,7 @@ class ChoicesController < ApplicationController
 
   def edit
     @choice = Choice.find(params[:id])
+    authorize @choice
     @question = @choice.question
   end
 
@@ -18,6 +19,25 @@ class ChoicesController < ApplicationController
     else
       render :new
     end
+  end
+
+  def update
+    @choice = Choice.find(params[:id])
+    authorize @choice
+    @question = @choice.question
+    if(@choice.update_attributes(choice_params))
+      redirect_to edit_choice_path(@choice)
+    else
+      render :edit
+    end
+  end
+
+  def destroy 
+    @choice = Choice.find(params[:id])
+    authorize @choice
+    @question = @choice.question
+    @choice.destroy
+    redirect_to edit_question_path(@question)
   end
 
   private

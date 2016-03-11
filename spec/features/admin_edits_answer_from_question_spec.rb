@@ -6,6 +6,7 @@ RSpec.feature 'Admin edits choice from question' do
   let!(:choice) { FactoryGirl.create(:choice, question: question) }
 
   scenario 'by changing its body' do
+    warden_login_as_admin
 
     visit(edit_question_path question.id)
     click_on "Edit Choice"

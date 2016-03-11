@@ -49,7 +49,4 @@
           .clearfix= link_to "Edit Question", edit_question_path(question), { class: "button float-right small" }
       .panel.clearfix
         %h4 New Question
-        = simple_form_for [@quiz, @new_question] do |form|
-          = form.input :body
-          .clearfix
-            = form.submit "Create Question", class: "button float-right"
+        = render "questions/form", button: "Create Question"

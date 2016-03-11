@@ -1,17 +1,27 @@
-%h1 Edit Choice
-%h4= @question.body << " > " <<  @choice.body
-%table
-  %tr
-    %th
-      Outcome Title
-    %th
-      Strength
-  - @choice.weights.each do |weight|
-    %tr
-      %td
-        = weight.outcome.name
-      %td
-        = weight.strength
+.row
+  .columns.small-12
+    .panel.my2.clearfix
+      %h4 Edit Choice
+      %p
+        %strong
+          Question:
+        = @question.body
+      %p
+        %strong
+          Body: 
+        = @choice.body
+      %a.button.small.mx1.my0.float-right{data: {open: "edit-details-modal"}} Edit Details
+      = link_to "Delete Choice", choice_path(@choice), method: :delete, class: "button float-right alert small", data: {confirm: "Are you sure?"}
+      #edit-details-modal.reveal{data: { reveal: ""}}
+        = simple_form_for @choice do |form|
+          = form.input :body
+          = form.submit "Save", class: "button float-right"
+    .panel.my2
+      %h4 Weights
+      - @choice.weights.each do |weight|
+        .panel
+          = weight.outcome.name
+          = weight.strength
 
 
-=link_to "Add Weight", new_choice_weight_path(@choice), class: 'button'
+      =link_to "Add Weight", new_choice_weight_path(@choice), class: 'button'

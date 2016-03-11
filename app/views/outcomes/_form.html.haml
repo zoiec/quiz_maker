@@ -1,0 +1,6 @@
+- form_object = local_assigns.fetch(:form_object, :outcome)
+= simple_form_for form_object do |form|
+  = form.input :name
+  = form.input :body
+  = form.input :picture, as: :file
+  = form.submit "Create Outcome", class: "button float-right"

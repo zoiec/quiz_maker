@@ -4,6 +4,7 @@ RSpec.describe ChoicesController do
 
   describe "#edit" do
     it 'returns a choice' do
+      devise_login_as_admin
       choice = create_choice
 
       get :edit, id: choice.id
@@ -12,6 +13,7 @@ RSpec.describe ChoicesController do
     end
 
     it 'render the edit template' do
+      devise_login_as_admin
       choice = create_choice
 
       get :edit, id: choice.id
@@ -22,6 +24,7 @@ RSpec.describe ChoicesController do
 
   describe "#new" do
     it 'handles the new action correctly' do
+      devise_login_as_admin
       question = stub_question
 
       get :new, question_id: question.id
@@ -30,6 +33,7 @@ RSpec.describe ChoicesController do
     end
 
     it 'renders the new template' do
+      devise_login_as_admin
       question = stub_question
 
       get :new, question_id: question.id
@@ -40,6 +44,7 @@ RSpec.describe ChoicesController do
     describe "#create" do
       context 'with valid data' do
         it 'creates a new choice' do
+          devise_login_as_admin
           question = create_question
           choice = FactoryGirl.attributes_for(:choice)
 
@@ -49,6 +54,7 @@ RSpec.describe ChoicesController do
         end
 
         it 'renders the edit template' do
+          devise_login_as_admin
           question = create_question
           choice = FactoryGirl.attributes_for(:choice)
 
@@ -60,6 +66,7 @@ RSpec.describe ChoicesController do
 
       context 'with invalid data' do
         it 'does not create a new choice' do
+          devise_login_as_admin
           question = create_question
           choice = {body: ""}
 
@@ -69,6 +76,7 @@ RSpec.describe ChoicesController do
         end
 
         it 'renders the new template' do
+          devise_login_as_admin
           question = create_question
           choice = {body: ""}
 

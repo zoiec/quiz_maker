@@ -26,7 +26,7 @@ Rails.application.routes.draw do
       resources :choices, only: [:new, :create]
     end
 
-    resources :choices, only: [:edit] do
+    resources :choices, only: [:edit, :update, :destroy] do
       resources :weights, only: [:new, :create]
     end
   end

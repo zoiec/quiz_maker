@@ -1,6 +1,2 @@
 %h1 New Choice
-
-=simple_form_for [@question, @choice] do |form|
-  =form.input :body
-  =form.submit "Create Choice"
-
+= render "form", button: "Create Choice"

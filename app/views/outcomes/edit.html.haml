@@ -1,6 +1,2 @@
 %h1 Edit Outcome
-= simple_form_for @outcome do |form|
-  = form.input :name
-  = form.input :body
-  = form.input :picture, as: :file
-  = form.submit "Save Changes", class: "button"
+= render "form", form_object: @outcome
