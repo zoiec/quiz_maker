@@ -12,7 +12,7 @@
         = @choice.body
       %a.button.small.mx1.my0.float-right{data: {open: "edit-details-modal"}} Edit Details
       = link_to "Delete Choice", choice_path(@choice), method: :delete, class: "button float-right alert small", data: {confirm: "Are you sure?"}
-      #edit-details-modal.reveal{data: { reveal: ""}}
+      #edit-details-modal.reveal.radius{data: { reveal: ""}}
         = simple_form_for @choice do |form|
           = form.input :body
           = form.submit "Save", class: "button float-right"

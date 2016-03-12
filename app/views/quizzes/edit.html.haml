@@ -14,7 +14,7 @@
         = @quiz.intro_content
       %a.button.small.mx1.my0.float-right{data: {open: "edit-details-modal"}} Edit Details
       = link_to "Delete Quiz", quiz_path(@quiz), class: "button small mx1 my0 alert float-right", data: {confirm: "Are you sure?"}, method: :delete
-      #edit-details-modal.reveal{data: { reveal: ""}}
+      #edit-details-modal.reveal.radius{data: { reveal: ""}}
         = render "form"
 .row
   .columns.small-12.medium-6

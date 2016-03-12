@@ -1,4 +1,4 @@
-%h1= @question.body
+%h4= @question.body
 = simple_form_for @answer do |form|
   = form.association :choice, collection: @question.choices, as: :radio_buttons, label_method: :body, checked: @answer.choice_id, label: false
   - unless @previous_question_answer.nil?
