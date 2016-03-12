@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resource :result, only: [:show]
   end
 
-  resources :questions, only: [:show] do
+  resources :questions, only: [] do
     resources :answers, only: [:new, :create]
   end
 
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
     resources :outcomes, only: [:edit, :update]
 
-    resources :questions, only: [:edit] do
+    resources :questions, only: [:edit, :update] do
       resources :choices, only: [:new, :create]
     end
 

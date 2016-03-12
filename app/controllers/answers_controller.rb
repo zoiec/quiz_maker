@@ -54,7 +54,7 @@ class AnswersController < ApplicationController
   def answer_params
     params.require(:answer).permit(:choice_id).merge(user_id: current_user.id)
   end
-  
+
   def next_step(user, question, quiz)
     next_question = question.next_question
     if(!next_question)

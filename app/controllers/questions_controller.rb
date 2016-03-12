@@ -23,9 +23,19 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
   end
 
+  def update
+    @question = Question.find(params[:id])
+    @quiz = @question.quiz
+    if(@question.update_attributes(question_params))
+      redirect_to edit_question_path(@question)
+    else
+      render :edit
+    end
+  end
+
   private
 
   def question_params
-    params.require(:question).permit(:body).merge(quiz: @quiz)
+    params.require(:question).permit(:body, :picture).merge(quiz: @quiz)
   end
 end
