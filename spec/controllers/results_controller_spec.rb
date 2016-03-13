@@ -4,6 +4,7 @@ describe ResultsController do
 
   describe "#show" do
     it "assigns a result" do
+      devise_login_as_user
       quiz = FactoryGirl.create(:quiz)
       outcome = double("outcome")
       result = double("result", 
