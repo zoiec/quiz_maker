@@ -22,6 +22,7 @@ gem 'faker'
 
 
 group :development, :test do
+  gem 'dotenv'
   gem 'byebug'
   gem 'bullet'
   gem 'rack-mini-profiler'

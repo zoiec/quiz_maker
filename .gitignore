@@ -7,9 +7,6 @@
 # Ignore bundler config.
 /.bundle
 
-# Ignore the default SQLite database.
-/db/*.sqlite3
-/db/*.sqlite3-journal
 .byebug_history
 
 # Ignore all logfiles and tempfiles.
@@ -22,3 +19,6 @@
 /public/system/
 /coverage
 *.DS_Store
+
+#Ignore secrets
+.env
