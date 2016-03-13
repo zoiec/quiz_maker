@@ -1,9 +1,9 @@
 %h1 Quizzes
 
-%table
+.panel
   - @quizzes.each do |quiz|
-    %tr
-      %td= quiz.title
-      %td= link_to "Edit Quiz", edit_quiz_path(quiz), class: "button small m0"
-      %td= link_to "Take Quiz", quiz_path(quiz), class: "small button m0"
+    .panel
+      = quiz.title
+      = link_to "Edit Quiz", edit_quiz_path(quiz), class: "button small m0"
+      = link_to "Take Quiz", quiz_path(quiz), class: "small button m0"
 =link_to "New Quiz", new_quiz_path, class: "button float-right"
