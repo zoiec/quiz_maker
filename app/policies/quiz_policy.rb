@@ -29,4 +29,8 @@ class QuizPolicy < ApplicationPolicy
   def destroy?
     @user.admin?
   end
+
+  def copy?
+    @user.admin?
+  end
 end

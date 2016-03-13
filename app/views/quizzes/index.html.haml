@@ -6,4 +6,5 @@
       = quiz.title
       = link_to "Edit Quiz", edit_quiz_path(quiz), class: "button small m0"
       = link_to "Take Quiz", quiz_path(quiz), class: "small button m0"
+      = link_to "Copy Quiz", quiz_copy_path(quiz), method: :post, class: "small button m0"
 =link_to "New Quiz", new_quiz_path, class: "button float-right"

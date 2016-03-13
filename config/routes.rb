@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
 
   resources :quizzes, only: [:show, :update, :destroy]  do
+    post "copy"
     resource :result, only: [:show]
   end
 

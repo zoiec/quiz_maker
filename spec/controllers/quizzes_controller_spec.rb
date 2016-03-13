@@ -177,6 +177,17 @@ RSpec.describe QuizzesController, type: :controller, focus: false do
     end
   end
 
+  describe "#copy" do
+    it "enqueues a copy job" do
+      devise_login_as_admin
+      quiz = FactoryGirl.create(:quiz)
+
+      post :copy, quiz_id: quiz.id
+
+      expect(Quiz.all.count).to eq(2)
+    end
+  end
+
   def expect_response_to_redirect_to_login
     expect(response).to redirect_to(new_user_session_path)
   end

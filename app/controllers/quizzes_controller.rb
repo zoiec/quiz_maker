@@ -49,6 +49,13 @@ class QuizzesController < ApplicationController
     redirect_to quizzes_path
   end
 
+  def copy
+    @quiz = Quiz.friendly.find(params[:quiz_id])
+    authorize @quiz
+    QuizCopier.copy(@quiz)
+    redirect_to quizzes_path
+  end
+
   private
 
   def quiz_params
