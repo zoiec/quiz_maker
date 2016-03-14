@@ -14,7 +14,6 @@ feature "Temporary user" do
     click_on("Next")
     expect(page).to have_content("You must create an account to view your results")
 
-
     expect(User.all.count).to eq(1)
   end
 

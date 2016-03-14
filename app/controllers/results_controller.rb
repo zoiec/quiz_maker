@@ -17,7 +17,7 @@ class ResultsController < ApplicationController
   def require_user_account
     if(current_user.guest?)
       flash[:notice] = "You must create an account to view your results"
-      redirect_to edit_user_registration_path
+      redirect_to new_guest_signup_path(after: quiz_result_path(@quiz))
     end
   end
 

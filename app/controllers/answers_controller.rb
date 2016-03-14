@@ -44,8 +44,7 @@ class AnswersController < ApplicationController
 
   def handle_user_login
     unless(user_signed_in?)
-      user = User.create(email: Faker::Internet.email,
-                         password: Faker::Internet.password,
+      user = User.create(guest_id: SecureRandom.hex,
                          guest: true)
       sign_in(:user, user)
     end

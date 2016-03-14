@@ -17,4 +17,14 @@ describe User do
 
   end
 
+  it "can be a guest" do
+    user = FactoryGirl.create(:user,
+                              guest_id: "Secret",
+                              guest: true,
+                              email: "",
+                              password: "")
+
+    expect(user).to be_valid
+  end
+
 end
