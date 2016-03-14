@@ -19,6 +19,11 @@
 var ready;
 ready = function(){
   $(document).foundation();
+  $("[data-slide-toggle]").click(function()
+  {
+    var id = $(event.target).attr("data-slide-toggle");
+    $("#" + id).slideToggle();
+  });
 }
 
 $(document).ready(ready);

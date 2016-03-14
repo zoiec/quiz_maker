@@ -5,14 +5,16 @@
     %p= @quiz.intro_content
   - if !user_signed_in?
     .columns.small-12.medium-6.panel.clearfix
-      %h4 Put in Your Email to Get Started!
-      = simple_form_for @user, url: simple_registration_path do |form|
-        = form.input :email
-        Maybe some kind of checkbox for receiving email
-        = hidden_field_tag :quiz_id, @quiz.id
-        = form.submit "Get Started", class: "button float-right"
+      %h4 Get Started!
+      = link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), class: "small-12 columns button"
       %hr
-      OR
-      = link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), class: "button"
+      .text-center
+        %a{"data-slide-toggle": "sign-in-dropdown"}  I'd like to sign in with email
+        #sign-in-dropdown{"data-slide": ""}
+          = simple_form_for @user, url: simple_registration_path do |form|
+            = form.input :email
+            Maybe some kind of checkbox for receiving email
+            = hidden_field_tag :quiz_id, @quiz.id
+            = form.submit "Get Started", class: "button float-right"
   - else
     = link_to "Get Started", new_question_answer_path(@quiz.first_question), class: "button float-right"
