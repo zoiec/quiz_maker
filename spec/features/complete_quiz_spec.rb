@@ -15,7 +15,7 @@ feature "Complete a quiz" do
     quiz = setup_full_quiz
     user = create_user
     visit quiz_path(quiz)
-    begin_quiz
+    click_on "Get Started"
 
     #I wrote up this example and just hard-coded the answers.
     #Check out spec/factories/full_quiz.rb
@@ -39,6 +39,7 @@ feature "Complete a quiz" do
   end
 
   def begin_quiz
+    fill_in "Email", with: Faker::Internet.email
     click_on "Get Started"
   end
 

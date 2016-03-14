@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
   devise_for :users
+  resource :simple_registration, only: [:new, :create]
   root 'quizzes#index'
 
 

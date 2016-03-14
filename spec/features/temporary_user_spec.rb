@@ -6,6 +6,7 @@ feature "Temporary user" do
     quiz = setup_full_quiz
     visit quiz_path(quiz)
 
+    fill_in "Email", with: Faker::Internet.email
     click_on "Get Started"
 
     choose("Always")
