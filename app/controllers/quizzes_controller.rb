@@ -23,6 +23,7 @@ class QuizzesController < ApplicationController
 
   def show
     @quiz = Quiz.friendly.find(params[:id])
+    @user = User.new
   end
 
   def edit

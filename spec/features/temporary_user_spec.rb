@@ -12,7 +12,6 @@ feature "Temporary user" do
     click_on("Next")
     choose("Yes")
     click_on("Next")
-    expect(page).to have_content("NOPE")
 
 
     expect(User.all.count).to eq(1)

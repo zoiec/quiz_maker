@@ -1,3 +1,12 @@
-%h1= @quiz.title
-%p= @quiz.intro_content
-=link_to "Get Started", new_question_answer_path(@quiz.first_question), class: "button float-right"
+.row
+  .columns.small-12
+    %h4= @quiz.title
+  .columns.small-12.medium-6
+    %p= @quiz.intro_content
+  .columns.small-12.medium-6.panel.clearfix
+    %h4 Put in Your Email to Get Started!
+    = simple_form_for @user, url: user_registration_path  do |form|
+      = form.input :email
+      Maybe some kind of checkbox for receiving email
+      = hidden_field_tag :next, new_question_answer_path(@quiz.first_question)
+      = form.submit "Get Started", class: "button float-right"
