@@ -1,5 +1,5 @@
 = simple_form_for local_assigns.fetch(:form_object, :answer) do |form|
   = form.association :choice, collection: @question.choices, as: :radio_buttons, label_method: :body, checked: @answer.choice_id, label: false
   - unless local_assigns.fetch(:previous_answer, nil).nil?
-    = link_to "Previous", edit_answer_path(previous_answer.id), class: "button float-left"
+    = link_to "Previous", edit_answer_path(previous_answer), class: "button float-left"
   = form.submit "Next", class: "button float-right"
