@@ -11,6 +11,8 @@
         Maybe some kind of checkbox for receiving email
         = hidden_field_tag :quiz_id, @quiz.id
         = form.submit "Get Started", class: "button float-right"
+      %hr
+      OR
+      = link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), class: "button"
   - else
     = link_to "Get Started", new_question_answer_path(@quiz.first_question), class: "button float-right"
-= @user.errors.inspect

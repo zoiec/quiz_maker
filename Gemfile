@@ -19,7 +19,7 @@ gem 'friendly_id'
 gem 'paperclip'
 gem 'aws-sdk', '< 2.0'
 gem 'faker'
-
+gem 'omniauth-facebook'
 
 group :development, :test do
   gem 'dotenv'

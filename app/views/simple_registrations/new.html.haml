@@ -1,0 +1,5 @@
+= simple_form_for @user, url: simple_registration_path do |form|
+  = form.input :email
+  Maybe some kind of checkbox for receiving email
+  = hidden_field_tag :quiz_id, @quiz.id
+  = form.submit "Get Started", class: "button float-right"
