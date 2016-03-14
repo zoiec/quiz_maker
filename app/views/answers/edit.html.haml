@@ -1,7 +1,7 @@
 %h4= @question.body
 .row
   .columns.small-12{class: ("medium-6" if @question.picture.file?) }
-    = render "form", form_object: @answer
+    = render "form", form_object: @answer, previous_answer: @previous_question_answer
   -if(@question.picture.file?)
     .columns.small-12.medium-6
       = image_tag @question.picture

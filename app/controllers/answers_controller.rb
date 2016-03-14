@@ -4,6 +4,7 @@ class AnswersController < ApplicationController
     handle_user_login
     @question = Question.find(params[:question_id])
     previous_answer = previous_answer_for_user(current_user)
+    @previous_question_answer = previous_question_answer_for_user(current_user)
     if(previous_answer)
       redirect_to edit_answer_path(previous_answer)
     else
@@ -15,6 +16,7 @@ class AnswersController < ApplicationController
     @answer = Answer.find(params[:id])
     authorize @answer
     @question = @answer.question
+    @previous_question_answer = previous_question_answer_for_user(current_user)
   end
 
   def update
@@ -67,5 +69,13 @@ class AnswersController < ApplicationController
   def previous_answer_for_user user
     Answer.where(choice: @question.choices,
                  user: user).order(created_at: :desc).limit(1).first
+  end
+
+  def previous_question_answer_for_user user
+    previous_question = @question.previous_question
+    unless(previous_question.nil?)
+      previous_answer = Answer.where(choice: @question.previous_question.choices, user: current_user).first
+    end
+    previous_answer
   end
 end
