@@ -1,4 +1,6 @@
 = simple_form_for @user, url: guest_signup_path do |form|
+  = hidden_field_tag :next, @next
   = form.input :email
   = form.input :password
   = form.input :password_confirmation
+  = form.submit "Sign Up"

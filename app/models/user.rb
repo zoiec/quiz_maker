@@ -9,4 +9,7 @@ class User < ActiveRecord::Base
   validates_presence_of :password, unless: :guest?
   validates_confirmation_of :password, unless: :guest?
   validates_length_of :password, within: 8..72, unless: :guest?
+
+  has_many :results
+  has_many :answers
 end
