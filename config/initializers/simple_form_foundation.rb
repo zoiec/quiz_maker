@@ -15,7 +15,7 @@ SimpleForm.setup do |config|
     b.optional :min_max
     b.optional :readonly
     b.use :label_input
-    b.use :error, wrap_with: { tag: :small, class: :error }
+    b.use :error
 
     # b.use :hint,  wrap_with: { tag: :span, class: :hint }
   end
@@ -29,12 +29,12 @@ SimpleForm.setup do |config|
     b.optional :readonly
 
     b.wrapper :label_wrapper, tag: :div, class: 'small-3 columns' do |ba|
-      ba.use :label, class: 'right inline'
+      ba.use :label, class: 'middle text-right'
     end
 
     b.wrapper :right_input_wrapper, tag: :div, class: 'small-9 columns' do |ba|
       ba.use :input
-      ba.use :error, wrap_with: { tag: :small, class: :error }
+      ba.use :error, wrap_with: { tag: :span, class: "is-invalid-label" }
       # ba.use :hint,  wrap_with: { tag: :span, class: :hint }
     end
   end

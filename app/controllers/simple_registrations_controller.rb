@@ -5,6 +5,9 @@ class SimpleRegistrationsController < ApplicationController
     if(@user.valid? && !@user.admin?)
       sign_in(:user, @user)
       redirect_to new_question_answer_path(@quiz.first_question)
+    elsif(@user.admin?)
+      flash[:notice] = "Logging in as admin requires a username and password"
+      redirect_to new_user_session_path
     else
       render "quizzes/show"
     end

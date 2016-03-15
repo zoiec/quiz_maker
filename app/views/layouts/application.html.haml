@@ -10,12 +10,12 @@
     = csrf_meta_tags
   %body
     .container
-      .top-bar
-        .top-bar-left
-          =link_to "Quiz Maker", root_path
-        .top-bar-right
-          =log_in_button
-
+      - if(current_user && current_user.admin?)
+        .top-bar
+          .top-bar-left
+            =link_to "Quiz Maker", root_path
+          .top-bar-right
+            =log_in_button
     .container
       .row
         .columns.small-10.small-push-1

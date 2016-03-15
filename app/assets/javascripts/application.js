@@ -19,10 +19,11 @@
 var ready;
 ready = function(){
   $(document).foundation();
-  $("[data-slide-toggle]").click(function()
+  $("[data-slide-toggle]").click(function(event)
   {
     var id = $(event.target).attr("data-slide-toggle");
     $("#" + id).slideToggle();
+    $(event.target).hide();
   });
 }
 
