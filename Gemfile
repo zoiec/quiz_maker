@@ -27,6 +27,7 @@ group :development, :test do
   gem 'bullet'
   gem 'rack-mini-profiler'
   gem 'simplecov'
+  gem 'pry'
 end
 
 group :test do

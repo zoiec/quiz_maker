@@ -1,10 +1,10 @@
 !!!
 %html
-  %head 
+  %head
     %meta{:charset => "utf-8"}
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
     %title= content_for?(:title) ? yield(:title) : "Quiz Maker"
-    = stylesheet_link_tag    "application"
+    = stylesheet_link_tag "application"
     = stylesheet_link_tag "https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900,300"
     = javascript_include_tag "application", 'data-turbolinks-track' => true
     = csrf_meta_tags
